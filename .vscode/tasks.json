@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Run Backend (FastAPI)",
+      "type": "shell",
+      "command": "python -m uvicorn backend.main:app --reload",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "servers"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Run Frontend (React)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "servers"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "3. Run Celery Worker",
+      "type": "shell",
+      "command": "python -m celery -A backend.tasks worker --loglevel=info -P gevent",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "servers"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start All Services",
+      "dependsOn": [
+        "1. Run Backend (FastAPI)",
+        "2. Run Frontend (React)",
+        "3. Run Celery Worker"
+      ],
+      "dependsOrder": "parallel",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

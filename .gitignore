@@ -1,0 +1,20 @@
+# Node dependencies (Frontend)
+node_modules/
+build/
+dist/
+
+# Python virtual environment & cache (Backend)
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Temporary PDF reports & Database
+temp_reports/
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
